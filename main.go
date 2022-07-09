@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	requests "github.com/elfshot/tt-api-wrapper/requests"
+	requests "github.com/Elfshot/tt-api-wrapper/requests"
 )
 
 func errNull(err error) {

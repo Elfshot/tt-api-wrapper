@@ -3,7 +3,7 @@ package tt_requests
 import (
 	"fmt"
 
-	models "github.com/elfshot/tt-api-wrapper/requests/models"
+	models "github.com/Elfshot/tt-api-wrapper/requests/models"
 )
 
 func Get_DataAdv(playerId uint32) (data *models.UserData, Error error) {
