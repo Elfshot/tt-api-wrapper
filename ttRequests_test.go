@@ -1,4 +1,4 @@
-package tt_requests
+package ttRequests
 
 import (
 	"testing"
@@ -6,6 +6,7 @@ import (
 
 // Tests
 func TestAdd(t *testing.T) {
+	Init()
 	data, err := Get_DataAdv(59504)
 	players, err := Get_Players()
 	fxplayers, err := Get_FxPlayers()

@@ -1,4 +1,4 @@
-package tt_requests_models
+package ttRequests_models
 
 type Sotd struct {
 	Aptitude string `json:"aptitude"`

@@ -1,4 +1,4 @@
-package tt_requests_models
+package ttRequests_models
 
 // Dunno how I'd implement the mixed json array so...
 //

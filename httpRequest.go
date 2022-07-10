@@ -1,4 +1,4 @@
-package tt_requests
+package ttRequests
 
 import (
 	"encoding/json"
@@ -11,7 +11,7 @@ import (
 
 var client = &http.Client{}
 
-func _Get(url string, strucVar any) (*any, error) {
+func Get_(url string, strucVar any) (*any, error) {
 	res, resErr := request(url)
 	if resErr != nil {
 		return nil, resErr
@@ -25,13 +25,20 @@ func _Get(url string, strucVar any) (*any, error) {
 	return &strucVar, nil
 }
 
-func _GetNoParse(url string) (*string, error) {
-	res, resErr := request(url)
-	if resErr != nil {
-		return nil, resErr
+func GetNoParse_(url string) (*http.Response, error) {
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("X-Tycoon-Key", os.Getenv("TYCOON_KEY_PRIVATE"))
+
+	resp, err := client.Do(req)
+	if err != nil { // Pass on any HTTP error
+		fmt.Println(err)
+		return nil, errors.New("HTTP Error: " + err.Error())
 	}
 
-	return &res, nil
+	return resp, nil
 }
 
 func parse(body string, parsed any) (*any, error) {
@@ -47,7 +54,11 @@ func parse(body string, parsed any) (*any, error) {
 func request(url string) (string, error) {
 	// Make the request
 	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Set("X-Tycoon-Key", os.Getenv("TYCOON_KEY"))
+	if err != nil {
+		return "", err
+	}
+
+	req.Header.Set("X-Tycoon-Key", os.Getenv("TYCOON_KEY_PRIVATE"))
 
 	resp, err := client.Do(req)
 	if err != nil { // Pass on any HTTP error
