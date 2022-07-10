@@ -22,7 +22,7 @@ func primaryGet(append string, struc any) (*any, error) {
 
 func Get_DataAdv(playerId uint32) (data *models.UserData, Error error) {
 	var res models.UserData
-	_, err := primaryGet(fmt.Sprintf("/status/dataadv/%d", playerId), &res)
+	_, err := primaryGet(fmt.Sprintf("/dataadv/%d", playerId), &res)
 
 	if err != nil {
 		return nil, err
@@ -32,16 +32,6 @@ func Get_DataAdv(playerId uint32) (data *models.UserData, Error error) {
 
 func Get_Players() (data *models.Players, Error error) {
 	var res models.Players
-	_, err := primaryGet("/status/players.json", &res)
-
-	if err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-func Get_FxPlayers() (data *models.FxPlayers, Error error) {
-	var res models.FxPlayers
 	_, err := primaryGet("/players.json", &res)
 
 	if err != nil {
@@ -50,9 +40,19 @@ func Get_FxPlayers() (data *models.FxPlayers, Error error) {
 	return &res, nil
 }
 
+// func Get_FxPlayers() (data *models.FxPlayers, Error error) {
+// 	var res models.FxPlayers
+// 	_, err := primaryGet("/players.json", &res)
+
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	return &res, nil
+// }
+
 func Get_Sotd() (data *models.Sotd, Error error) {
 	var res models.Sotd
-	_, err := primaryGet("/status/sotd.json", &res)
+	_, err := primaryGet("/sotd.json", &res)
 
 	if err != nil {
 		return nil, err

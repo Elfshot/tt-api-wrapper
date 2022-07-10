@@ -46,7 +46,7 @@ func Init() {
 			Name:      "NY-1",
 			Id:        1,
 			CfxId:     "2epova",
-			DirectUrl: "http://server.tycoon.community:30120",
+			DirectUrl: "http://v1.api.tycoon.community/main",
 			CfxUrl:    "https://tycoon-2epova.users.cfx.re",
 			AliveUrl:  "",
 			Alive:     false,
@@ -55,8 +55,8 @@ func Init() {
 			Name:      "NY-2",
 			Id:        2,
 			CfxId:     "njyvop",
-			DirectUrl: "http://server.tycoon.community:30121",
-			CfxUrl:    "https://tycoon-njyvop.users.cfx.re",
+			DirectUrl: "http://v1.api.tycoon.community/beta",
+			CfxUrl:    "https://tycoon-njyvop.users.cfx.re/status",
 			AliveUrl:  "",
 			Alive:     false,
 		},
@@ -71,7 +71,8 @@ func Init() {
 
 func checkServers() {
 	aliveDown := 0
-	for i := range &AliveServers.Servers {
+
+	for i := len(&AliveServers.Servers) - 1; i >= 0; i-- {
 		server := &AliveServers.Servers[i]
 		aliveCheck(server)
 		if server.Alive {
@@ -87,12 +88,12 @@ func checkServers() {
 }
 
 func aliveCheck(server *serverType) {
-	first, err := GetNoParse_(server.DirectUrl + "/status/alive")
+	first, err := GetNoParse_(server.DirectUrl + "/alive")
 	if err != nil || (first.StatusCode != 200 && first.StatusCode != 204) {
-		second, err := GetNoParse_(server.CfxUrl + "/status/alive")
+		second, err := GetNoParse_(server.CfxUrl + "/alive")
 
 		if err != nil || (second.StatusCode != 200 && second.StatusCode != 204) {
-			server.AliveUrl = server.DirectUrl
+			server.AliveUrl = ""
 			server.Alive = false
 		} else {
 			server.AliveUrl = server.CfxUrl
