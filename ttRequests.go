@@ -20,6 +20,20 @@ func primaryGet(append string, struc any) (*any, error) {
 	return &struc, nil
 }
 
+func serverGet(serverId uint8, append string, struc any) (*any, error) {
+	server, servErr := ServerSpecAlive(serverId)
+	if servErr != nil {
+		return nil, servErr
+	}
+
+	_, err := Get_(server.AliveUrl+append, struc)
+	if err != nil {
+		return nil, err
+	}
+
+	return &struc, nil
+}
+
 func Get_DataAdv(playerId uint32) (data *models.UserData, Error error) {
 	var res models.UserData
 	_, err := primaryGet(fmt.Sprintf("/dataadv/%d", playerId), &res)
@@ -30,9 +44,19 @@ func Get_DataAdv(playerId uint32) (data *models.UserData, Error error) {
 	return &res, nil
 }
 
-func Get_Players() (data *models.Players, Error error) {
+func Get_Players(serverId uint8) (data *models.Players, Error error) {
 	var res models.Players
-	_, err := primaryGet("/players.json", &res)
+	_, err := serverGet(serverId, "/players.json", &res)
+
+	if err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func Get_WidgetPlayers(serverId uint8) (data *models.WidgetPlayers, Error error) {
+	var res models.WidgetPlayers
+	_, err := serverGet(serverId, "/widget/players.json", &res)
 
 	if err != nil {
 		return nil, err
