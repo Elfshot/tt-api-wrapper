@@ -30,3 +30,14 @@ func TestSingleSpecServRequest(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestSinglePlayersTotal(t *testing.T) {
+	checkInit()
+	data, err := GetTotalPlayers()
+	if err != nil {
+		t.Error(err)
+	}
+	if data == nil {
+		t.Error("Expected data to be non-nil")
+	}
+}

@@ -28,7 +28,7 @@ type widgetPlayersDxp []interface{}
 
 type widgetPlayersPlayers []widgetPlayersPlayer
 
-// [string, uint16 uint32, string, bool, string, bool]
+// [string, uint16 uint32, string|false, bool, string, bool]
 //
 // [Name, Src, VrpId, DiscordAvatar, IsStaff, Job, IsDonor]
 type widgetPlayersPlayer []interface{}
