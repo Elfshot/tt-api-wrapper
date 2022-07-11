@@ -26,12 +26,6 @@ var servers [2]serverType
 var aliveToggle bool = false
 var AliveServers AliveServer
 
-func checkInit() {
-	if aliveToggle != true {
-		Init()
-	}
-}
-
 func cronAlive() {
 	cron := gocron.NewScheduler(time.UTC)
 
@@ -40,6 +34,9 @@ func cronAlive() {
 }
 
 func Init() {
+	if aliveToggle == true {
+		return
+	}
 	aliveToggle = true
 	servers = [2]serverType{
 		{
