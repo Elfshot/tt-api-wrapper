@@ -1,22 +1,32 @@
+// Tests fail without ENV variables set. TYCOON_KEY_PRIVATE
 package ttRequests
 
 import (
 	"testing"
 )
 
-// Tests
-func TestAdd(t *testing.T) {
-	Init()
+func TestMainInit(t *testing.T) {
+	checkInit()
+}
+func TestSingleAnyServRequest(t *testing.T) {
+	checkInit()
 	data, err := Get_DataAdv(59504)
-	players, err := Get_Players()
-	// fxplayers, err := Get_FxPlayers()
-	sotd, err := Get_Sotd()
 
-	if data == nil || players == nil || sotd == nil {
-		t.Error("One of the requests failed (empty response)")
+	if data == nil {
+		t.Error("Expected data to be non-nil")
 	}
 	if err != nil {
 		t.Error(err)
 	}
+}
+func TestSingleSpecServRequest(t *testing.T) {
+	checkInit()
+	data, err := Get_WidgetPlayers(1)
 
+	if data == nil {
+		t.Error("Expected data to be non-nil")
+	}
+	if err != nil {
+		t.Error(err)
+	}
 }
