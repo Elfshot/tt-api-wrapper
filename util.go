@@ -30,13 +30,13 @@ func GetTotalPlayers() ([]models.BaseTotalPlayer, error) {
 			}
 
 			newPlayer := models.BaseTotalPlayer{
-				Name:       player[0].(string),
-				VrpId:      uint32(vrp),
-				DiscordUrl: player[3].(string),
-				IsStaff:    player[4].(bool),
-				IsDonor:    player[6].(bool),
-				Job:        player[5].(string),
-				ServerId:   i,
+				Name:      player[0].(string),
+				VrpId:     uint32(vrp),
+				AvatarUrl: player[3].(string),
+				IsStaff:   player[4].(bool),
+				IsDonor:   player[6].(bool),
+				Job:       player[5].(string),
+				ServerId:  i,
 			}
 			newPlayers = append(newPlayers, newPlayer)
 		}
