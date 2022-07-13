@@ -85,9 +85,9 @@ func checkServers() {
 }
 
 func aliveCheck(server *serverType) {
-	first, err := GetNoParse_(server.DirectUrl + "/alive")
+	first, err := GetNoParse_(server.DirectUrl + "/players.json")
 	if err != nil || (first.StatusCode != 200 && first.StatusCode != 204) {
-		second, err := GetNoParse_(server.CfxUrl + "/alive")
+		second, err := GetNoParse_(server.CfxUrl + "/players.json")
 
 		if err != nil || (second.StatusCode != 200 && second.StatusCode != 204) {
 			server.AliveUrl = ""

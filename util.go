@@ -2,6 +2,7 @@ package ttRequests
 
 import (
 	"errors"
+	"log"
 	"reflect"
 
 	models "github.com/Elfshot/tt-api-wrapper/models"
@@ -25,6 +26,12 @@ func GetTotalPlayers() ([]models.BaseTotalPlayer, error) {
 		for ii := 0; ii < len(players); ii++ {
 			player := players[ii]
 			vrp := player[2].(float64)
+
+			// log.Printf("%+v\n", player)
+			if player[0] == nil {
+				log.Printf("Entry of player had invalid name: %+v\n", player)
+				continue
+			}
 			if reflect.TypeOf(player[3]).Kind() == reflect.Bool {
 				player[3] = ""
 			}
