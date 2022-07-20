@@ -4,10 +4,10 @@ type UserData struct {
 	User_id   uint32
 	Data_type string
 	Code      string
-	Data      data
+	Data      UserDataData
 }
 
-type data struct {
+type UserDataData struct {
 	Plate_override     string            `json:"plate_override"`
 	Gaptitudes         gaptitudes        `json:"gaptitudes"`
 	Gaptitudes_v       gaptitudesv       `json:"gaptitudes_v"`
@@ -104,7 +104,7 @@ type customization struct {
 }
 
 type vehicle struct {
-	Has_trailer   bool   `json:"has_trailer"`
+	// Has_trailer   bool `json:"has_trailer"`
 	Vehicle_model int32  `json:"vehicle_model"`
 	Vehicle_label string `json:"vehicle_label"`
 	Vehicle_type  string `json:"vehicle_type"`

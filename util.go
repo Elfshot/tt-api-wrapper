@@ -30,7 +30,7 @@ func GetTotalPlayers() ([]models.BaseTotalPlayer, error) {
 			// log.Printf("%+v\n", player)
 			if player[0] == nil {
 				log.Printf("Entry of player had invalid name: %+v\n", player)
-				continue
+				player[0] = ""
 			}
 			if reflect.TypeOf(player[3]).Kind() == reflect.Bool {
 				player[3] = ""
